@@ -12,7 +12,10 @@ class Settings(BaseSettings):
     POSTGRES_USER: str = "postgres"
     POSTGRES_PASSWORD: str = "password"
     POSTGRES_DB: str = "annie"
-    SQLALCHEMY_DATABASE_URI: Optional[str] = None
+    
+    @property
+    def SQLALCHEMY_DATABASE_URI(self) -> str:
+        return f"postgresql://{self.POSTGRES_USER}:{self.POSTGRES_PASSWORD}@{self.POSTGRES_SERVER}/{self.POSTGRES_DB}"
 
     MONGO_URI: str = "mongodb://localhost:27017"
     MONGO_DB: str = "annie_scripts"
@@ -21,9 +24,11 @@ class Settings(BaseSettings):
     GEMINI_API_KEY: str = ""
     PINECONE_API_KEY: str = ""
     PINECONE_ENV: str = "us-west1-gcp"
+    VITE_API_URL: Optional[str] = None
 
     class Config:
         case_sensitive = True
         env_file = ".env"
+        extra = "ignore"
 
 settings = Settings()

@@ -6,6 +6,7 @@ python-jose[cryptography]
 passlib[bcrypt]
 python-multipart
 sqlalchemy
+alembic
 pymongo
 google-generativeai
 langchain
@@ -19,4 +20,3 @@ PyPDF2
 scikit-learn
 vaderSentiment
 spacy
-lucide-react
