@@ -1,7 +1,19 @@
 import React, { useCallback, useEffect } from 'react';
 import { useScriptStore } from '../store/useScriptStore';
 import { retentionApi } from '../api';
-import debounce from 'lodash/debounce';
+
+// Simple debounce without lodash
+function debounce(func, wait) {
+    let timeout;
+    return function executedFunction(...args) {
+        const later = () => {
+            clearTimeout(timeout);
+            func(...args);
+        };
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+    };
+}
 
 const Editor = () => {
     const { currentScript, updateContent, setRetentionData } = useScriptStore();
